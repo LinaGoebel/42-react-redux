@@ -1,7 +1,7 @@
-import { ErrorMessage, InputContainer, InputElement, Label } from "./styles.js";
-import "./styles.ts";
-// eslint-disable-next-line @typescript-eslint/consistent-type-imports
-import { InputProps } from "./types.js";
+/* eslint-disable @typescript-eslint/consistent-type-imports */
+import { ErrorMessage, InputContainer, InputElement, Label } from "./styles";
+import { InputProps } from "./types";
+
 
 
 function Input({ name, id, type = 'text', placeholder, label, value, onChange, error }: InputProps) {
