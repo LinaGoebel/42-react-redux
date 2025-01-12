@@ -1,6 +1,6 @@
 //1. Импортируем функцию, с помощью которой создаём slice
 import { createAppSlice } from "../../createAppSlice";
-import type { CounterStateSlice } from "./types";
+import { CounterStateSlice } from "./types";
 
 //4.1 Создём объект с первоначальным состоянием, который мы потом передаём в initialState
 const counterInitialState: CounterStateSlice = {
