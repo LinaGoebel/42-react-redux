@@ -5,9 +5,10 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 
 //lessons
 // import Lesson16 from "./lessons/Lesson16/Lesson16"
+import Lesson17 from "./lessons/Lesson17/Lesson17"
 
 //homeworks
-import Homework16 from "./homeworks/Homework16/Homework16"
+// import Homework16 from "./homeworks/Homework16/Homework16"
 
 //consultations
 // import Consultation08 from "./consultations/Consultation08/Consultation08"
@@ -25,7 +26,8 @@ const App = () => {
           <Route path='*' element='Page not found'/>
         </Routes>
       </Layout> */}
-      <Homework16 />
+      {/* <Homework16 /> */}
+      <Lesson17 />
     </BrowserRouter>
   )
 }
