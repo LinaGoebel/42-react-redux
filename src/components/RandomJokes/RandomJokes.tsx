@@ -7,6 +7,7 @@ import type { RandomJoke } from "../../store/redux/randomJokes/types";
 
 function RandomJokes() {
   const dispatch = useAppDispatch();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { data, error, status } = useAppSelector(randomJokesSliceSelectors.jokeData)
 
   const getJoke = () => {
