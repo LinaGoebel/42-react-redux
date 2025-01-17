@@ -1,17 +1,13 @@
 import Button from "../Button/Button";
 import Spinner from "../Spinner/Spinner";
-import { JokeCard, JokesContainer, RandomJokesWrapper, JokeText } from "./styles";
+import { JokeCard, JokesContainer, RandomJokesWrapper, JokeWrapper, JokeText } from "./styles";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { randomJokesSliceActions, randomJokesSliceSelectors} from "../../store/redux/randomJokes/randomJokesSlice";
-import { v4 } from "uuid";
-
-
+import { randomJokesSliceActions, randomJokesSliceSelectors } from "../../store/redux/randomJokes/randomJokesSlice";
+import type { RandomJoke } from "../../store/redux/randomJokes/types";
 
 function RandomJokes() {
-  const dispatch = useAppDispatch()
-  const { data, error, status } = useAppSelector(
-    randomJokesSliceSelectors.jokeData,
-  )
+  const dispatch = useAppDispatch();
+  const { data, error, status } = useAppSelector(randomJokesSliceSelectors.jokeData)
 
   const getJoke = () => {
     dispatch(randomJokesSliceActions.getJoke())
@@ -21,26 +17,35 @@ function RandomJokes() {
     dispatch(randomJokesSliceActions.deleteAllJokes())
   }
 
-  console.log(data)
+  console.log(data);
 
-  const jokes = data.map((joke: any) => {
+
+  const jokes = data.map((joke: RandomJoke) => {
+    const deleteJoke = () => {
+      dispatch(randomJokesSliceActions.deleteJoke(joke.id))
+    }
+
     return (
-      <JokeText key={v4()}>
-        {joke.setup} - {joke.punchline}
-      </JokeText>
+      <JokeWrapper key={joke.id}>
+        <JokeText>{joke.joke}</JokeText>
+        <Button name='x' onClick={deleteJoke} />
+      </JokeWrapper>
     )
   })
+
 
   return (
     <RandomJokesWrapper>
       <JokeCard>
-        <Button name="GET JOKES" onClick={getJoke} />
-        {status === "loading" && <Spinner />}
-        <JokesContainer>{jokes}</JokesContainer>
-        <Button name="DELETE JOKES" onClick={deleteJokes} />
+        <Button name='GET JOKES' onClick={getJoke} />
+        {status === 'loading' && <Spinner />}
+        <JokesContainer>
+          {jokes}
+        </JokesContainer>
+        <Button name='DELETE JOKES' onClick={deleteJokes} />
       </JokeCard>
     </RandomJokesWrapper>
   )
 }
 
-export default RandomJokes
+export default RandomJokes;
