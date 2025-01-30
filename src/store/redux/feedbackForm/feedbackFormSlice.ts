@@ -1,24 +1,24 @@
 import axios from "axios"
 import { createAppSlice } from "../../createAppSlice"
-import type { FeedbackFormSliceState } from "./types";
-import {FeedbackFormData } from "./types"
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import type { FeedbackFormData, FeedbackFormSliceState } from "./types"
 import type { FeedbackFormValue } from "../../../components/FeedbackForm/types"
-/* import { FeedbackFormValue } from "../../../components/FeedbackForm/types"
-import { PayloadAction } from "@reduxjs/toolkit" */
+//import type { FeedbackFormValue } from "../../../components/FeedbackForm/types"
+//import { PayloadAction } from "@reduxjs/toolkit"
 
-const feedbackInitialState: FeedbackFormSliceState = {
+const feedbackFormInitialState: FeedbackFormSliceState = {
   data: [],
   error: undefined,
   status: "default",
 }
+
 export const feedbackFormSlice = createAppSlice({
   name: "FEEDBACK_FORM",
 
-  initialState: feedbackInitialState,
-
+  initialState: feedbackFormInitialState,
   reducers: create => ({
     sendData: create.asyncThunk(
-      async (formData:FeedbackFormValue, thunkApi) => {
+      async (formData: FeedbackFormValue, thunkApi) => {
         try {
           const result = await axios.post(
             "https://jsonplaceholder.typicode.com/posts",
@@ -29,12 +29,13 @@ export const feedbackFormSlice = createAppSlice({
           thunkApi.rejectWithValue(error)
         }
       },
+
       {
         pending: (state: FeedbackFormSliceState) => {
           state.status = "loading"
           state.error = undefined
         },
-        fulfilled: (state: FeedbackFormSliceState, action:any) => {
+        fulfilled: (state: FeedbackFormSliceState, action: any) => {
           state.status = "success"
           state.data = [...state.data, action.payload]
         },
@@ -44,11 +45,11 @@ export const feedbackFormSlice = createAppSlice({
         },
       },
     ),
+
   }),
   selectors: {
-    returnedData: (state: FeedbackFormSliceState) => state,
+    returnedData: (state: FeedbackFormSliceState)=> state,
   },
 })
-
 export const feedbackFormSliceActions = feedbackFormSlice.actions
 export const feedbackFormSliceSelectors = feedbackFormSlice.selectors
